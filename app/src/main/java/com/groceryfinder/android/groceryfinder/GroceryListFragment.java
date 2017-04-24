@@ -36,6 +36,8 @@ public class GroceryListFragment extends Fragment {
         mGroceryRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_grocery_list);
         mGroceryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        updateUI();
+
         return v;
     }
 

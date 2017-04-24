@@ -10,6 +10,6 @@ public class GroceryListActivity extends SingleFragmentActivity {
 
     @Override
     public Fragment createFragment() {
-        return new GroceryListFragment().newInstance();
+        return new GroceryListFragment();
     }
 }
