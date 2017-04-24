@@ -62,7 +62,19 @@ public class GroceryListFragment extends Fragment {
         @Override
         public GroceryStoreHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(R.layout.)
+            View view = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            return new GroceryStoreHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(GroceryStoreHolder holder, int position) {
+            GroceryStore groceryStore = mGroceryStoreList.get(position);
+            holder.mGroceryStoreTextView.setText(groceryStore.getName());
+        }
+
+        @Override
+        public int getItemCount() {
+            return mGroceryStoreList.size();
         }
     }
 }
