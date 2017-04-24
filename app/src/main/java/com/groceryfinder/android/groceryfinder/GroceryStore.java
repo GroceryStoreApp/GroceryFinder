@@ -1,5 +1,7 @@
 package com.groceryfinder.android.groceryfinder;
 
+import java.util.UUID;
+
 /**
  * Created by KaiMacBookAir on 4/24/17.
  */
@@ -10,12 +12,17 @@ public class GroceryStore {
     private String address;
     private String zip;
     private String storeId;
+    private UUID id;
 
     public GroceryStore(String name, String address, String zip, String storeId) {
         this.name = name;
         this.address = address;
         this.zip = zip;
         this.storeId = storeId;
+    }
+
+    public GroceryStore(String name) {
+        this(name, "", "", "");
     }
 
     public String getName() {
@@ -48,5 +55,9 @@ public class GroceryStore {
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;
+    }
+
+    public UUID getId () {
+        return id;
     }
 }

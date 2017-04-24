@@ -18,6 +18,7 @@ import java.util.List;
 public class GroceryListFragment extends Fragment {
 
     private RecyclerView mGroceryRecyclerView;
+    private GroceryStoreAdapter mAdapter;
 
     public static GroceryListFragment newInstance() {
         return new GroceryListFragment();
@@ -36,6 +37,14 @@ public class GroceryListFragment extends Fragment {
         mGroceryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return v;
+    }
+
+    private void updateUI() {
+        GroceryStoreLab lab = GroceryStoreLab.get(getActivity());
+        List<GroceryStore> stores = lab.getGroceryStores();
+
+        mAdapter = new GroceryStoreAdapter(stores);
+        mGroceryRecyclerView.setAdapter(mAdapter);
     }
 
     //Viewholder holds a textview with information about the grocery stores
