@@ -7,8 +7,9 @@ import android.support.v4.app.Fragment;
  */
 
 public class GroceryListActivity extends SingleFragmentActivity {
+
     @Override
     public Fragment createFragment() {
-        return new GroceryListFragment.succ();
+        return new GroceryListFragment().newInstance();
     }
 }

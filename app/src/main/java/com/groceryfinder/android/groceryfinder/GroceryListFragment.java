@@ -1,5 +1,6 @@
 package com.groceryfinder.android.groceryfinder;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 /**
@@ -8,7 +9,14 @@ import android.support.v4.app.Fragment;
 
 public class GroceryListFragment extends Fragment {
 
-    public static GroceryListFragment succ() {
+    public static GroceryListFragment newInstance() {
         return new GroceryListFragment();
+    }
+
+
+
+    @Override
+    public void onCreate(Bundle onSavedInstance) {
+        super.onCreate(onSavedInstance);
     }
 }
