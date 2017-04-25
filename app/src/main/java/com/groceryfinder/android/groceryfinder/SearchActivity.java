@@ -2,8 +2,15 @@ package com.groceryfinder.android.groceryfinder;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class SearchActivity extends AppCompatActivity {
+
+    //Phone location button
+    private ImageButton useLocButton;
+    //Manual location button
+    private ImageButton manualButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
