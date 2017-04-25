@@ -20,6 +20,8 @@ public class GroceryListFragment extends Fragment {
     private RecyclerView mGroceryRecyclerView;
     private GroceryStoreAdapter mAdapter;
 
+    private String address;
+
     public static GroceryListFragment newInstance() {
         return new GroceryListFragment();
     }
@@ -53,12 +55,32 @@ public class GroceryListFragment extends Fragment {
     //Textview will be changed to a more detailed view with information about the stores
     private class GroceryStoreHolder extends RecyclerView.ViewHolder {
 
-        public TextView mGroceryStoreTextView;
+        private GroceryStore mGroceryStore;
+
+        private TextView mStoreTextView;
+        private TextView mAddressTextView;
+        private TextView mDistanceTextView;
+        private TextView mCostTextView;
+        private TextView mZipTextView;
 
         public GroceryStoreHolder(View itemView) {
             super(itemView);
 
-            mGroceryStoreTextView = (TextView) itemView;
+            mStoreTextView = (TextView) itemView.findViewById(R.id.list_layout_title);
+            mAddressTextView = (TextView) itemView.findViewById(R.id.list_layout_address);
+            mDistanceTextView = (TextView) itemView.findViewById(R.id.list_layout_distance);
+            mCostTextView = (TextView) itemView.findViewById(R.id.list_layout_cost);
+            mZipTextView = (TextView) itemView.findViewById(R.id.list_layout_zip);
+        }
+
+        public void bindStore(GroceryStore store) {
+            mGroceryStore = store;
+
+            mStoreTextView.setText(mGroceryStore.getName());
+            mAddressTextView.setText(mGroceryStore.getAddress());
+            mDistanceTextView.setText(mGroceryStore.getDistanceFrom("temporary"));
+            mCostTextView.setText(mGroceryStore.getCost());
+            mZipTextView.setText(mGroceryStore.getZip());
         }
     }
 
@@ -73,14 +95,14 @@ public class GroceryListFragment extends Fragment {
         @Override
         public GroceryStoreHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            View view = layoutInflater.inflate(R.layout.grocery_store_list_layout, parent, false);
             return new GroceryStoreHolder(view);
         }
 
         @Override
         public void onBindViewHolder(GroceryStoreHolder holder, int position) {
             GroceryStore groceryStore = mGroceryStoreList.get(position);
-            holder.mGroceryStoreTextView.setText(groceryStore.getName());
+            holder.bindStore(groceryStore);
         }
 
         @Override

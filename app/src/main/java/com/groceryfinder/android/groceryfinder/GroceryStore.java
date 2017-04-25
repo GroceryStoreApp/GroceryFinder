@@ -13,12 +13,14 @@ public class GroceryStore {
     private String zip;
     private String storeId;
     private UUID id;
+    private String cost;
 
     public GroceryStore(String name, String address, String zip, String storeId) {
         this.name = name;
         this.address = address;
         this.zip = zip;
         this.storeId = storeId;
+        this.cost = "$$$";
     }
 
     public GroceryStore(String name) {
@@ -59,5 +61,17 @@ public class GroceryStore {
 
     public UUID getId () {
         return id;
+    }
+
+    public String getDistanceFrom(String location) {
+        return "5";
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
     }
 }
