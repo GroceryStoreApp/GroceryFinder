@@ -29,7 +29,7 @@ public class GroceryStoreLab {
     private GroceryStoreLab(Context context) {
         mGroceryStores = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            GroceryStore store = new GroceryStore("Target", "UP ur butt and around the corner", "98052", "id");
+            GroceryStore store = new GroceryStore("Target", "Redmond", "98052", "id");
             mGroceryStores.add(store);
         }
     }

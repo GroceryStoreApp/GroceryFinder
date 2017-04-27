@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="2">
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:background="@android:color/background_light">
 
         <!--TextView for the store name-->
         <TextView
             android:id="@+id/list_layout_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="2"/>
+            android:textStyle="bold"
+            android:textSize="10pt"/>
 
         <!--TextView for the distance away from current location-->
         <TextView
             android:id="@+id/list_layout_distance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1"/>
+            android:layout_below="@+id/list_layout_cost"
+            android:gravity="end"/>
 
         <!--TextView for the address-->
         <TextView
             android:id="@+id/list_layout_address"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="2"/>
+            android:layout_below="@+id/list_layout_title"/>
 
         <!--TextView for the cost or something-->
         <TextView
             android:id="@+id/list_layout_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1"/>
+            android:gravity="end"/>
 
         <!--TextView for the zip code or city or something-->
         <TextView
             android:id="@+id/list_layout_zip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_layout_address"/>
 
-    </GridLayout>
 </RelativeLayout>
