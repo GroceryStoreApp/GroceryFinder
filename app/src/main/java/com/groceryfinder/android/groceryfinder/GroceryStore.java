@@ -1,5 +1,7 @@
 package com.groceryfinder.android.groceryfinder;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.UUID;
 
 /**
@@ -8,9 +10,14 @@ import java.util.UUID;
 
 public class GroceryStore {
 
+    @SerializedName("Storename")
     private String name;
+    @SerializedName("Address")
     private String address;
+    @SerializedName("Zip")
     private String zip;
+    @SerializedName("City")
+    private String city;
     private String storeId;
     private UUID id;
     private String cost;
@@ -73,5 +80,13 @@ public class GroceryStore {
 
     public void setCost(String cost) {
         this.cost = cost;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

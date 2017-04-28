@@ -1,14 +1,18 @@
 package com.groceryfinder.android.groceryfinder;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,10 +21,14 @@ import java.util.List;
 
 public class GroceryListFragment extends Fragment {
 
+    private static final String TAG = "GroceryListFragment";
+
     private RecyclerView mGroceryRecyclerView;
-    private GroceryStoreAdapter mAdapter;
+    //private GroceryStoreAdapter mAdapter;
+    private List<GroceryStore> mStores = new ArrayList<>();
 
     private String address;
+    private String zip = "99205";
 
     public static GroceryListFragment newInstance() {
         return new GroceryListFragment();
@@ -29,6 +37,7 @@ public class GroceryListFragment extends Fragment {
     @Override
     public void onCreate(Bundle onSavedInstance) {
         super.onCreate(onSavedInstance);
+        new FetchStoresTask().execute();
     }
 
     @Override
@@ -38,11 +47,18 @@ public class GroceryListFragment extends Fragment {
         mGroceryRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_grocery_list);
         mGroceryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        updateUI();
+        //updateUI();
 
         return v;
     }
 
+    private void setupAdapter() {
+        if (isAdded()) {
+            mGroceryRecyclerView.setAdapter(new GroceryStoreAdapter(mStores));
+        }
+    }
+
+    /*
     private void updateUI() {
         GroceryStoreLab lab = GroceryStoreLab.get(getActivity());
         List<GroceryStore> stores = lab.getGroceryStores();
@@ -50,6 +66,7 @@ public class GroceryListFragment extends Fragment {
         mAdapter = new GroceryStoreAdapter(stores);
         mGroceryRecyclerView.setAdapter(mAdapter);
     }
+    */
 
     //Viewholder holds a textview with information about the grocery stores
     //Textview will be changed to a more detailed view with information about the stores
@@ -77,7 +94,7 @@ public class GroceryListFragment extends Fragment {
             mGroceryStore = store;
 
             mStoreTextView.setText(mGroceryStore.getName());
-            mAddressTextView.setText(mGroceryStore.getAddress());
+            mAddressTextView.setText(mGroceryStore.getCity());
             mDistanceTextView.setText(mGroceryStore.getDistanceFrom("temporary"));
             mCostTextView.setText(mGroceryStore.getCost());
             mZipTextView.setText(mGroceryStore.getZip());
@@ -108,6 +125,19 @@ public class GroceryListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mGroceryStoreList.size();
+        }
+    }
+
+    private class FetchStoresTask extends AsyncTask<Void, Void, List<GroceryStore>> {
+        @Override
+        protected List<GroceryStore> doInBackground(Void... params) {
+            return new GroceryFetcher().fetchStores(zip);
+        }
+
+        @Override
+        protected void onPostExecute(List<GroceryStore> stores) {
+            mStores = stores;
+            setupAdapter();
         }
     }
 }
